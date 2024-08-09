@@ -1,7 +1,4 @@
-export function shuffleTitleColour(
-  titleElement: HTMLButtonElement,
-  themeCheckboxElement: HTMLInputElement
-) {
+export function shuffleTitleColour(titleElement: HTMLButtonElement) {
   let index = 0;
 
   titleElement.addEventListener("click", () => {
