@@ -20,6 +20,8 @@
   --transition-short: 0.15s;
   --transition-medium: 0.25s;
   --transition-long: 0.35s;
+
+  --gradient-1: #f6e96b, #bedc74, #a2ca71, #387f39, #f6e96b;
 }
 
 %theme-switch-transition {
@@ -146,14 +148,7 @@ h1 {
     display: block;
     position: absolute;
     inset: -3px;
-    background-image: conic-gradient(
-      from var(--angle),
-      red,
-      green,
-      blue,
-      yellow,
-      red
-    );
+    background-image: conic-gradient(from var(--angle), var(--gradient-1));
     animation: rotate 3s linear infinite;
     z-index: -1;
     transition: filter var(--transition-short);
