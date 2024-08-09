@@ -1,11 +1,11 @@
 import "./style.scss";
 import { shuffleTitleColour } from "./shuffle.ts";
 
-const titleElem = document.querySelector<HTMLButtonElement>("#shuffle");
-const themeCheckboxElem = document.querySelector<HTMLInputElement>(
-  "#switch-theme-checkbox"
-);
+const element = document.documentElement;
+const styles = getComputedStyle(element);
 
-if (titleElem && themeCheckboxElem) {
-  shuffleTitleColour(titleElem);
+const cardElem = document.querySelector<HTMLButtonElement>("#shuffle");
+
+if (cardElem && styles) {
+  shuffleTitleColour(cardElem, styles);
 }
