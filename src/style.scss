@@ -1,0 +1,122 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark light;
+
+  --color: #f9f9f9;
+  --color-5: rgba(249, 249, 249, 0.5);
+  --background-color: #242424;
+  --background-color-5: rgba(36, 36, 36, 0.5);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  --max-container-width: 1280px;
+
+  --transition-short: 0.15s;
+  --transition-medium: 0.25s;
+  --transition-long: 0.35s;
+}
+
+%theme-switch-transition {
+  transition-property: color, background-color;
+  transition-duration: var(--transition-short);
+  transition-duration: 0.05s;
+  transition-timing-function: ease-in-out;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+body {
+  @extend %theme-switch-transition;
+  margin: 0;
+  font-size: 16px;
+  color: var(--color);
+  background-color: var(--background-color);
+
+  &:has(#switch-theme-checkbox:checked) {
+    --color: #242424;
+    --background-color: #ffffff;
+
+    --color-5: rgba(36, 36, 36, 0.5);
+    --background-color-5: rgba(249, 249, 249, 0.5);
+  }
+}
+
+a {
+  font-weight: 500;
+  text-decoration: inherit;
+}
+
+a:hover {
+  color: #535bf2;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+  cursor: pointer;
+
+  &::selection {
+    background-color: transparent;
+  }
+}
+
+#app {
+  max-width: var(--max-container-width);
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+#switch-theme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  input {
+    appearance: none;
+    display: none;
+
+    &:checked + label::after {
+      translate: calc(100% + var(--offset) * 2) 0;
+    }
+  }
+
+  label {
+    font-size: 0;
+    width: 60px;
+    height: 30px;
+    border-radius: 1in;
+    background-color: var(--color);
+    display: grid;
+    align-items: center;
+    box-shadow: inset 0 0 4px 1px red;
+    box-shadow: inset 0 0 4px 1px var(--background-color-5);
+
+    &::after {
+      --offset: 3px;
+      content: "";
+      position: absolute;
+      height: calc(100% - var(--offset) * 2);
+      aspect-ratio: 1;
+      left: 0;
+      background-color: var(--background-color);
+      border-radius: 1in;
+      margin: var(--offset);
+      transition-property: background-color, translate;
+      transition-duration: var(--transition-long);
+    }
+  }
+}
+
+.card {
+  padding: 2em;
+}
