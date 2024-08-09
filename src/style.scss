@@ -5,10 +5,10 @@
 
   color-scheme: dark light;
 
-  --color: #f9f9f9;
-  --color-5: rgba(249, 249, 249, 0.5);
-  --background-color: #242424;
-  --background-color-5: rgba(36, 36, 36, 0.5);
+  --secondary-color: #f9f9f9;
+  --secondary-color-5: rgba(249, 249, 249, 0.5);
+  --primary-color: #242424;
+  --primary-color-5: rgba(36, 36, 36, 0.5);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -38,15 +38,15 @@ body {
   @extend %theme-switch-transition;
   margin: 0;
   font-size: 16px;
-  color: var(--color);
-  background-color: var(--background-color);
+  color: var(--secondary-color);
+  background-color: var(--primary-color);
 
   &:has(#switch-theme-checkbox:checked) {
-    --color: #242424;
-    --background-color: #ffffff;
+    --secondary-color: #242424;
+    --primary-color: #ffffff;
 
-    --color-5: rgba(36, 36, 36, 0.5);
-    --background-color-5: rgba(249, 249, 249, 0.5);
+    --secondary-color-5: rgba(36, 36, 36, 0.5);
+    --primary-color-5: rgba(249, 249, 249, 0.5);
   }
 }
 
@@ -95,11 +95,11 @@ h1 {
     width: 60px;
     height: 30px;
     border-radius: 1in;
-    background-color: var(--color);
+    background-color: var(--secondary-color);
     display: grid;
     align-items: center;
     box-shadow: inset 0 0 4px 1px red;
-    box-shadow: inset 0 0 4px 1px var(--background-color-5);
+    box-shadow: inset 0 0 4px 1px var(--primary-color-5);
 
     &::after {
       --offset: 3px;
@@ -108,7 +108,7 @@ h1 {
       height: calc(100% - var(--offset) * 2);
       aspect-ratio: 1;
       left: 0;
-      background-color: var(--background-color);
+      background-color: var(--primary-color);
       border-radius: 1in;
       margin: var(--offset);
       transition-property: background-color, translate;
@@ -118,5 +118,64 @@ h1 {
 }
 
 .card {
-  padding: 2em;
+  padding: 1.5rem;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  position: relative;
+  border-radius: 0.5rem;
+  width: min(100%, 36ch);
+  margin-inline: auto;
+
+  h3 {
+    margin: 0 0.5rem 0;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &::before,
+  &::after {
+    --angle: 0turn;
+    content: "";
+    border-radius: inherit;
+    display: block;
+    position: absolute;
+    inset: -3px;
+    background-image: conic-gradient(
+      from var(--angle),
+      red,
+      green,
+      blue,
+      yellow,
+      red
+    );
+    animation: rotate 3s linear infinite;
+    z-index: -1;
+    transition: filter var(--transition-short);
+  }
+
+  &::after {
+    filter: blur(3px);
+  }
+
+  &:hover::after {
+    filter: blur(6px);
+  }
+}
+
+@keyframes rotate {
+  to {
+    --angle: 1turn;
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0turn;
+  inherits: false;
 }
